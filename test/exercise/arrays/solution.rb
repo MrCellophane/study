@@ -2,36 +2,35 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        array
+        max = array[0]
+        for i in 1..array.size - 1
+          max = array[i] if array[i] > max
+        end
         for i in 0..array.size - 1
-          if array[i] > 0
-            array[i] = array.max
-          end
+          array[i] = max if array[i] > 0
         end
         array
       end
 
-      def search(_array, _query)
+      def search(array, query)
         low = 0
-        high = _array.size - 1
-        if low > high 
+        high = array.size - 1
+        if low > high
           -1
         else
-          while low <=  high do
+          while low <= high
             mid = (low + high) / 2
-            quess = _array[mid]
-            if quess < _query
+            quess = array[mid]
+            if quess < query
               low = mid + 1
-            elsif quess > _query
+            elsif quess > query
               high = mid - 1
             else
               break mid
             end
-            if low > high
-              break -1
-            end
+            break -1 if low > high
           end
-        end  
+        end
       end
     end
   end
